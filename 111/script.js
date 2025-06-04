@@ -42,6 +42,12 @@
     },ms);
   };
 
+  // --- Dummy AI generation ---------------------------------
+  async function generateMail(prompt){
+    // OpenAI 等への実装を想定したダミーロジック
+    return `件名:${prompt}\n\n${prompt}の本文サンプルです。`;
+  }
+
   /* -----------------------------------------------------------
      2. グローバル状態
   ----------------------------------------------------------- */
@@ -97,6 +103,7 @@
   const area = $("#builderArea");
   const palette = $("#slotList");
   const setting = $("#slotSetting");
+  if(!area || !palette || !setting) return; // 必須要素が無ければ処理終了
 
   /* -----------------------------------------------------------
      5. Palette / DnD
@@ -289,7 +296,8 @@
   /* -----------------------------------------------------------
      8. 各種ボタン
   ----------------------------------------------------------- */
-  $("#exportBtn").addEventListener("click",()=>{
+  const exportBtn = $("#exportBtn");
+  if(exportBtn) exportBtn.addEventListener("click",()=>{
     const html = state.slots.map(s=>{
       if(s.type==="text") return `<div style="padding:${s.padY}px ${s.padX}px;text-align:${s.align};color:${s.color};background:${s.bg}">${s.content}</div>`;
       if(s.type==="image") return `<div style="padding:${s.padY}px ${s.padX}px;text-align:${s.align};background:${s.bg}"><img src="${s.src}" style="max-width:100%"></div>`;
@@ -303,7 +311,8 @@
     URL.revokeObjectURL(link.href);
   });
 
-  $("#previewBtn").addEventListener("click",()=>{
+  const previewBtn = $("#previewBtn");
+  if(previewBtn) previewBtn.addEventListener("click",()=>{
     const w = window.open("","_blank","width=800,height=600");
     const html = state.slots.map(s=>{
       if(s.type==="text") return `<div style="padding:${s.padY}px ${s.padX}px;text-align:${s.align};color:${s.color};background:${s.bg}">${s.content}</div>`;
@@ -312,6 +321,26 @@
     }).join("");
     w.document.write(`<!doctype html><html><body style="margin:0">${html}</body></html>`);
   });
+
+  // AIアシスタントボタン
+  const aiBtn = Array.from(document.querySelectorAll('button'))
+    .find(b=>b.textContent.includes('メール全体を生成'));
+  const aiInput = aiBtn ? aiBtn.parentElement.querySelector('input') : null;
+  if(aiBtn){
+    aiBtn.disabled = false;
+    aiBtn.addEventListener('click', async ()=>{
+      const prompt = aiInput ? aiInput.value : '';
+      const txt = await generateMail(prompt);
+      let slot = state.slots.find(s=>s.id===state.selectedId && s.type==='text');
+      if(!slot){
+        slot = slotTpl.text();
+        state.slots.push(slot);
+      }
+      slot.content = txt.replace(/\n/g,'<br />');
+      render();
+      updateSetting();
+    });
+  }
 
   /* -----------------------------------------------------------
      9. 起動
