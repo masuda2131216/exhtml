@@ -97,6 +97,7 @@
   const area = $("#builderArea");
   const palette = $("#slotList");
   const setting = $("#slotSetting");
+  const aiBtn = document.getElementById('aiGenerateBtn');
 
   /* -----------------------------------------------------------
      5. Palette / DnD
