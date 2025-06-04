@@ -157,8 +157,8 @@
 
       // controls (duplicate / delete)
       const ctrl = make(`<div class="slot-ctrl"></div>`);
-      ctrl.innerHTML = "✚ ×"; // simple icons
-      ctrl.firstChild.style.marginRight="6px";
+      ctrl.innerHTML = `<span class="dup">✚</span><span class="del">×</span>`;
+      ctrl.querySelector('.dup').style.marginRight = '6px';
       ctrl.style.position="absolute";
       ctrl.style.top="-10px";
       ctrl.style.right="0";
@@ -169,14 +169,14 @@
       wrap.addEventListener("mouseenter",()=>ctrl.style.display="block");
       wrap.addEventListener("mouseleave",()=>ctrl.style.display="none");
 
-      ctrl.firstChild.addEventListener("click",e=>{ // duplicate
+      ctrl.querySelector('.dup').addEventListener("click",e=>{ // duplicate
         e.stopPropagation();
         const copy = JSON.parse(JSON.stringify(slot));
         copy.id = uid();
         state.slots.splice(state.slots.indexOf(slot)+1,0,copy);
         render();
       });
-      ctrl.lastChild.addEventListener("click",e=>{ // delete
+      ctrl.querySelector('.del').addEventListener("click",e=>{ // delete
         e.stopPropagation();
         state.slots = state.slots.filter(s=>s.id!==slot.id);
         if(state.selectedId===slot.id) state.selectedId=null;
