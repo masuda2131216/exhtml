@@ -185,7 +185,7 @@
      </label>
      <input class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-1 text-gray-900 text-sm" placeholder="メールファイル名を入力してください" value=""/>
      <div class="flex gap-2">
-      <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 rounded-md px-3 text-sm">
+       <button id="previewBtn" class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 rounded-md px-3 text-sm">
        <svg class="lucide lucide-eye h-4 w-4 mr-1" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
         <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z">
         </path>
@@ -211,7 +211,7 @@
         </font>
        </font>
       </button>
-      <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 rounded-md px-3 text-sm">
+      <button id="exportBtn" class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 rounded-md px-3 text-sm">
        <svg class="lucide lucide-save h-4 w-4 mr-1" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
         <path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z">
         </path>
@@ -272,7 +272,7 @@
         </button>
        </div>
       </div>
-      <div class="min-h-[600px] border-2 border-dashed border-gray-300 bg-white p-6 rounded-lg">
+       <div id="builderArea" class="min-h-[600px] border-2 border-dashed border-gray-300 bg-white p-6 rounded-lg">
        <div class="text-center text-gray-500 py-20">
         <div class="text-base mb-2">
          <font style="vertical-align: inherit;">
@@ -333,7 +333,7 @@
            </font>
           </font>
          </h3>
-         <div class="grid grid-cols-2 gap-3 mb-6">
+         <div id="slotList" class="grid grid-cols-2 gap-3 mb-6">
           <div class="border border-gray-200 rounded-lg p-3 text-center transition-all shadow-sm cursor-grab hover:bg-gray-50 hover:border-blue-300" draggable="true">
            <div class="flex flex-col items-center gap-2">
             <div class="p-2 rounded-lg bg-gray-100">
@@ -573,12 +573,12 @@
          </div>
         </div>
        </div>
+       <div id="slotSetting" class="p-4 space-y-4" style="display:none;"></div>
       </div>
      </div>
     </div>
    </div>
   </div>
-  <script src="script.js">
-  </script>
+  <script src="script.js" defer></script>
  </body>
 </html>

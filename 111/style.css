@@ -4546,3 +4546,14 @@ body {
   --font-sans: __variable_3a0388;
   --font-mono: __variable_c1e5c9;
 }
+
+/* --- custom rules for builder --- */
+#slotList .slot-item {
+  padding:4px;
+  border:1px dashed #cbd5e1;
+  cursor:grab;
+  text-align:center;
+}
+#slotSetting {
+  background:#f9fafb;
+}
